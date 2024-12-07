@@ -1,0 +1,37 @@
+@url = https://recipe.vaangis.dk/api/v1
+@jwt_token =eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFbWlsIFZhbmciLCJzdWIiOiJlbWlsViIsImV4cCI6MTczMzYwMTQ3Niwicm9sZXMiOiJhZG1pbix1c2VyIiwidXNlcm5hbWUiOiJlbWlsViJ9.lbSPjTjlfrf8bbUe9XtcECmcbqRyBq-wBatYR40A7Is
+### get my recipes
+GET {{url}}/recipes
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+### Create a new user
+POST {{url}}/auth/register/
+
+{
+    "username": "emilV",
+    "password": "1234"
+}
+
+### Login with user
+POST {{url}}/auth/login/
+
+{
+    "username": "emilV",
+    "password": "1234"
+}
+
+### Create a new recipe 
+POST {{url}}/recipes
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "title": "vanilla ice cream",
+    "ingredientsAndGrams": "750 g milk. 750 g cream. 200 g eggyolk. 200 g sugar, 1 pod of vanilla",
+    "description": "boil the milk, cream and vanilla. add into the yolk and sugar. heat til 82 degree ",
+    "difficulty": "MEDIUM"
+
+}
+
+
