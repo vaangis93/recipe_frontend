@@ -21,7 +21,7 @@ function Brainstorm() {
       <br />
 
       <h4>Brainstorm Frontend</h4>
-      <BrainstormPngStyle src="public\pics\brainstorm_frontend.png" />
+      <BrainstormPngStyle src="pics\brainstorm_frontend.png" />
     </>
   );
 }
