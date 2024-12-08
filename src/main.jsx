@@ -7,6 +7,7 @@ import Login from './pages/Login.jsx'
 import About from './pages/About.jsx'
 import Recipe from './pages/Recipe.jsx'
 import MainLayout from './layout/MainLayout.jsx'
+import Brainstorm from './pages/Brainstorm.jsx'
 
 
 const router = createBrowserRouter(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       <Route path='home' element={<Home/>}/>
       <Route path='login' element={<Login/>}/>
       <Route path='recipe' element={<Recipe/>}/>
+      <Route path='brainstorm' element={<Brainstorm/>}/>
 
 
     </Route>

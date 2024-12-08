@@ -1,8 +1,17 @@
+import GlobalStyle from "../styles/GlobalStyle";
+import styled from "styled-components";
 function Home() {
-    return ( 
+
+
+
+
+  return (
     <>
-    <h1>Home</h1>
-<p>waqwan.  Anata wa bakadesu. make the recipe api! get the head out ur ass</p>    </> );
+      <h1>Home</h1>
+   
+     
+    </>
+  );
 }
 
 export default Home;
