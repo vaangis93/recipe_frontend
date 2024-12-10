@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import blabla from "../apiFacade";
 import { data } from "react-router";
+import RecipeForm from "../components/RecipeForm";
 
 function Recipe() {
   const [dataFromApiObject, setdataFromApiObject] = useState({}); // if endpoint returns an object
@@ -40,6 +41,7 @@ function Recipe() {
   return (
     <>
       <h1>Recipe</h1>
+      <RecipeForm/> 
 
       {checkDataType === "array" &&
         dataFromApiArray.map((data) => <h3 key={data.id}>{data.title}</h3>)}
@@ -55,6 +57,8 @@ function Recipe() {
         {" "}
         Get a single recipe here!{" "}
       </button>
+
+    
     </>
   );
 }
