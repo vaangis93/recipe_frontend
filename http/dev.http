@@ -1,6 +1,5 @@
 @url = https://recipe.vaangis.dk/api/v1
-@jwt_token =eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFbWlsIFZhbmciLCJzdWIiOiJlbWlsViIsImV4cCI6MTczMzYwMTQ3Niwicm9sZXMiOiJhZG1pbix1c2VyIiwidXNlcm5hbWUiOiJlbWlsViJ9.lbSPjTjlfrf8bbUe9XtcECmcbqRyBq-wBatYR40A7Is
-### get my recipes
+@jwt_token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFbWlsIFZhbmciLCJzdWIiOiJlbWlsViIsImV4cCI6MTczMzgzODAyNCwicm9sZXMiOiJ1c2VyIiwidXNlcm5hbWUiOiJlbWlsViJ9.3cA1Tm0AyzlJLCoiVpVPq2p6fMHXd3lFSvVnuzD0huc
 GET {{url}}/recipes
 Accept: application/json
 Authorization: Bearer {{jwt_token}}

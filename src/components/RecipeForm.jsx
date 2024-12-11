@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import apiFacade from "../apiFacade";
 
-
 function RecipeForm() {
 
   const [formData, setFormData] = useState({
@@ -10,6 +9,8 @@ function RecipeForm() {
     description: "",
     difficulty: "MEDIUM", // Default value for the dropdown
   });
+
+  const [recipe, setRecipe] = useState(null);
 
   // List of difficulty levels
   const difficulties = ["VERY_EASY", "EASY", "MEDIUM", "HARD", "VERY_HARD"];
@@ -26,9 +27,11 @@ function RecipeForm() {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    // !!!!!!! Updated this line to send formData as the body when calling fetchData
     try {
-      const response = apiFacade.fetchData("/recipes", "POST", true);
-  
+      const response = await apiFacade.fetchData("/recipes", setRecipe, "POST", true, formData); // !!!!!!! Added formData as an argument to send it as the body
+      console.log("Recipe created successfully:", data);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -90,6 +93,7 @@ function RecipeForm() {
         </div>
         <button type="submit">Create Recipe</button>
       </form>
+      <p>Created recipe: {JSON.stringify(recipe)}</p>
     </div>
   );
 }

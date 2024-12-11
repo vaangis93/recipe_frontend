@@ -19,8 +19,10 @@ const login = (username, password) => {
         .then(data => {setToken(data.token) })
    
  }
-const fetchData = (urlPath, callback,  method, addToken, body) => {
+ // all the "=" are default values. so if we dont write anything in the function call, it will use the default values
+const fetchData = (urlPath='', callback=undefined,  method='GET', addToken=false, body='') => {
     const options = makeOptions(method, addToken, body);
+    console.log("Request options:", options);
     return fetch (URL + urlPath, options).then(handleHttpErrors).then (data => {callback(data)});
 
   }
@@ -33,7 +35,7 @@ const makeOptions= (method,addToken,body) =>{
     }
   }
   if (addToken && loggedIn()) {
-    opts.headers["Authorization"] = `Baerer ${getToken()}`;
+    opts.headers["Authorization"] = `Bearer ${getToken()}`;
   }
   if (body) {
     opts.body = JSON.stringify(body);
