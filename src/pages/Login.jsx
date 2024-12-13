@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import facade from "../apiFacade";
 import LoggedIn from "../components/LoggedIn";
 import CreateUser from "../components/CreateUser";
