@@ -12,7 +12,7 @@ import About from "./pages/About.jsx";
 import Recipe from "./pages/Recipe.jsx";
 import MainLayout from "./layout/MainLayout.jsx";
 import Brainstorm from "./pages/Brainstorm.jsx";
-
+import RecipeForm from "./pages/RecipeForm.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,10 +20,9 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="about" element={<About />} />
       <Route path="home" element={<Home />} />
-
       <Route path="login" element={<Login />} />
-
       <Route path="recipe" element={<Recipe />} />
+      <Route path="/recipeform" element={<RecipeForm/>} />
       <Route path="brainstorm" element={<Brainstorm />} />
     </Route>
   )

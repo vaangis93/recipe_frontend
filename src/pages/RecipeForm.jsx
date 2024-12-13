@@ -27,8 +27,7 @@ function RecipeForm() {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // !!!!!!! Updated this line to send formData as the body when calling fetchData
+ 
     try {
       const response = await apiFacade.fetchData("/recipes", setRecipe, "POST", true, formData); // !!!!!!! Added formData as an argument to send it as the body
       console.log("Recipe created successfully:", data);
@@ -40,6 +39,7 @@ function RecipeForm() {
       console.log("Recipe created successfully:", data);
     } catch (error) {
       console.error("Error creating recipe:", error);
+      <h3>Need to login with admin before you can create</h3>
     }
   };
   

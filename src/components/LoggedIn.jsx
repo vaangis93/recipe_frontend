@@ -3,17 +3,26 @@ import apiFacade from "../apiFacade";
 import Login from "../pages/LogIn";
 import styled from "styled-components";
 import * as modalstyle from "./ModalStyledComponents";
-
-
+import { NavLink } from "react-router";
+import TopMenu from "./TopMenu";
 
 function LoggedIn() {
   const [showModal, setShowModal] = useState(false); // get loggedIn from Login components usestate
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    console.log("You are now logged in");
+    apiFacade.loggedIn
+    setIsLoggedIn(true);
+  };
 
   const handleLogout = () => {
     apiFacade.logout();
     console.log("You are now logged in"); // get loggedIn from Login components usestate to check if user is logged in
     window.location.reload();
+    setIsLoggedIn(false);
     console.log("You are now logged out");
+    showModal(false);
   };
 
   const clickHandle = () => {
@@ -26,9 +35,24 @@ function LoggedIn() {
 
   return (
     <div>
-      <h2>Welcome! You are now logged in.</h2>
-      {/* Add any additional content you want to display for logged-in users */}
-      <p>This is where you can show user-specific information or features.</p>
+      {/* THIS IS WHERE WE PASS OUR FUNCTIONS AS PROPS TO TopMenu !! */}
+      <TopMenu
+        isLoggedIn={isLoggedIn}
+        handleLogin={handleLogin}
+        handleLogout={clickHandle} // Pass modal logic here
+      />
+       <div>
+        {isLoggedIn ? (
+          <h2>
+            Welcome! Click <NavLink to="/recipe">here</NavLink> to browse recipes.
+          </h2>
+        ) : (
+          <h2>Please log in to access recipes.</h2>
+        )}
+      </div>
+
+
+
       <button onClick={clickHandle}>Logout</button>
       {showModal && (
         <modalstyle.ModalOverlay>

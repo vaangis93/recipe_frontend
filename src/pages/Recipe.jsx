@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import blabla from "../apiFacade";
-import { data } from "react-router";
-import RecipeForm from "../components/RecipeForm";
+import { data, Link } from "react-router";
+import RecipeForm from "./RecipeForm";
+
 
 function Recipe() {
   const [dataFromApiObject, setdataFromApiObject] = useState({}); // if endpoint returns an object
@@ -112,7 +113,9 @@ function Recipe() {
         ------------------------------Create recipe
         form/input-----------------------------------
       </h3>
-      <RecipeForm />
+      <Link to="/recipeform">Create a New Recipe</Link>
+
+      {/* <RecipeForm /> */}
       <br />
       <h3>
         -----------------------------Buttons to get all or single

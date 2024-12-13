@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import facade from "../apiFacade";
 import LoggedIn from "../components/LoggedIn";
+import CreateUser from "../components/CreateUser";
 
 function Login() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -56,18 +57,8 @@ function Login() {
           </form>
           
           <br />
-          <h2>Create User </h2>
-          <form onSubmit="">
-            <input type="text" placeholder="Write your new user name" id="WriteUserName"/>
-            <input type="password" placeholder="Write your new password" id="NewPassword" />
-            <button type="submut">Create User</button>
-
-
-
-
-
-
-          </form>
+          <CreateUser/>
+  
         </div>
       )}
     </div>
