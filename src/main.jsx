@@ -7,7 +7,7 @@ import {
   createRoutesFromElements,
 } from "react-router";
 import Home from "./pages/Home.jsx";
-import Login from "./pages/LogIn.jsx";
+import Login from "./pages/Login.jsx";
 import About from "./pages/About.jsx";
 import Recipe from "./pages/Recipe.jsx";
 import MainLayout from "./layout/MainLayout.jsx";
