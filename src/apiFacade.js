@@ -19,7 +19,7 @@ const login = (username, password) => {
         .then(data => {setToken(data.token) })
    
  }
- // all the "=" are default values. so if we dont write anything in the function call, it will use the default values
+ // all the "=" are default values. so if we dont write anything
 const fetchData = (urlPath='', callback=undefined,  method='GET', addToken=false, body='') => {
     const options = makeOptions(method, addToken, body);
     console.log("Request options:", options);

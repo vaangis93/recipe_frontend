@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import blabla from "../apiFacade";
-import { data, Link } from "react-router";
-import RecipeForm from "./RecipeForm";
+import { Link } from "react-router";
+import croissant from "../components/Croissant";
+
 
 
 function Recipe() {
@@ -12,6 +13,7 @@ function Recipe() {
 
    // List of difficulty levels
    const enumDifficulties = ["VERY_EASY", "EASY", "MEDIUM", "HARD", "VERY_HARD"];
+
 
   // to check if its one recipe(object) or all/more recipes(array)
   function checkType(data) {
@@ -108,6 +110,8 @@ function Recipe() {
   return (
     <>
       <h1>Recipe</h1>
+    
+      
       <br />
       <h3>
         ------------------------------Create recipe

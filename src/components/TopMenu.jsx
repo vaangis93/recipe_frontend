@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import * as modalstyle from "../styles/ModalStyledComponents";
 import { useState } from "react";
+import { User } from 'lucide-react';
 
 const StyledMenu = styled.ul`
   display: flex;
@@ -46,6 +47,7 @@ const closeModal = () => setShowModal(false);
             onClick={isLoggedIn ? clickHandle : handleLogin} // Use clickHandle for Logout
             to={isLoggedIn ? "/" : "/login"} // Navigate based on login state
           >
+            <User/>
             {isLoggedIn ? "Logout" : "Login"}
           </NavLink>
       </li>

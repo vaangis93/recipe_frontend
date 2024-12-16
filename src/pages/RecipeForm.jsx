@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import apiFacade from "../apiFacade";
+import { Croissant } from "lucide-react";
 
 function RecipeForm() {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [succesMsg, setsuccesMsg] = useState(null);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -27,29 +30,47 @@ function RecipeForm() {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
- 
+
     try {
-      const response = await apiFacade.fetchData("/recipes", setRecipe, "POST", true, formData); // !!!!!!! Added formData as an argument to send it as the body
-      console.log("Recipe created successfully:", data);
+      const response = await apiFacade.fetchData(
+        "/recipes",
+        setRecipe,
+        "POST",
+        true,
+        formData
+      );
+      console.log("API Response:", response); 
+       // !!!!!!! Added formData as an argument to send it as the body
+      // console.log("Recipe created successfully:", data);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
+      
+
       const data = await response.json(); // Parse the JSON response
       console.log("Recipe created successfully:", data);
+      setsuccesMsg("Recipe created successfully!");
     } catch (error) {
+
       console.error("Error creating recipe:", error);
-      <h3>Need to login with admin before you can create</h3>
+      setErrorMessage("You need to be Admin to create an recipe");
+      if (recipe === null) {
+        
+        console.log("You need to be Admin to create an recipe");
+      }
     }
   };
-  
+
+
+
 
   return (
     <div>
       <h2>Create a New Recipe</h2>
-      <form onSubmit={handleSubmit}>
+      <Croissant/> 
+      <form onSubmit={handleSubmit} >
         <div>
-          <label htmlFor="title">Title:</label>
+          <label htmlFor="title" > Title:</label>
           <input
             type="text"
             id="title"
@@ -58,6 +79,7 @@ function RecipeForm() {
             required
           />
         </div>
+        
         <div>
           <label htmlFor="ingredientsAndGrams">Ingredients (with grams):</label>
           <textarea
@@ -91,9 +113,12 @@ function RecipeForm() {
             ))}
           </select>
         </div>
-        <button type="submit">Create Recipe</button>
+        <button type="submit">
+          Create Recipe
+        </button>
       </form>
       <p>Created recipe: {JSON.stringify(recipe)}</p>
+      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 }
