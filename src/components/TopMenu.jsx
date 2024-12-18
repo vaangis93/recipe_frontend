@@ -1,23 +1,24 @@
-import { NavLink } from "react-router";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import * as modalstyle from "../styles/ModalStyledComponents";
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Updated TopMenu with a burger menu for mobile responsiveness.
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import { useState } from "react";
-import { User } from 'lucide-react';
+import PropTypes from "prop-types";
+import { NavLink } from "react-router";
+import * as modalstyle from "../styles/ModalStyledComponents"; // If you have additional modal styles
+import {
+  HeaderContainer,
+  StyledMenu,
+  StyledNavLink,
+  MenuIcon, // Added MenuIcon for the burger menu
+} from "../styles/TopMenuStyles"; // Import styled components
+import { Home, Info, User, Utensils, Eye } from "lucide-react";
 
-const StyledMenu = styled.ul`
-  display: flex;
-  list-style: none;
-  gap: 15px;
-`;
-
-
-
-function TopMenu({ isLoggedIn, handleLogin, handleLogout }) {
+const TopMenu = ({ isLoggedIn, handleLogin, handleLogout }) => {
   const [showModal, setShowModal] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Added state to toggle menu visibility
 
   // Close modal without logging out
-const closeModal = () => setShowModal(false);
+  const closeModal = () => setShowModal(false);
 
   // Open modal for logout confirmation
   const clickHandle = () => setShowModal(true);
@@ -27,50 +28,69 @@ const closeModal = () => setShowModal(false);
     closeModal(); // Close the modal after logout
   };
 
-
+  // Toggle the menu visibility on mobile
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <>
-    <StyledMenu>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/recipe">Recipe</NavLink>
-      </li>
-      <li>
-        <NavLink to="/about">About</NavLink>
-      </li>
-      <li>
-        {/* Conditionally render Login/Logout */}
-        <NavLink
-            onClick={isLoggedIn ? clickHandle : handleLogin} // Use clickHandle for Logout
-            to={isLoggedIn ? "/" : "/login"} // Navigate based on login state
-          >
-            <User/>
-            {isLoggedIn ? "Logout" : "Login"}
-          </NavLink>
-      </li>
-      <li>
-        <NavLink to="/brainstorm">Brainstorm and vision</NavLink>
-      </li>
-    </StyledMenu>
-        {showModal && (
-          <modalstyle.ModalOverlay>
-            <modalstyle.ModalContent>
-              <h3>Are you sure you want to log out?</h3>
-              <modalstyle.ModalButton primary onClick={handleLogoutAndCloseModal}>
-                Yes
-              </modalstyle.ModalButton>
-              <modalstyle.LogoutButton onClick={closeModal}>
-                No
-              </modalstyle.LogoutButton>
-            </modalstyle.ModalContent>
-          </modalstyle.ModalOverlay>
-        )}
-</>
+      <HeaderContainer>
+        <nav>
+          {/* Hamburger icon for mobile */}
+          <MenuIcon onClick={toggleMenu}>☰</MenuIcon>
+
+          <StyledMenu menuOpen={menuOpen}>
+            <li>
+              <StyledNavLink to="/" activeClassName="active">
+                <Home />
+              </StyledNavLink>
+            </li>
+            <li>
+              <StyledNavLink to="/recipe" activeClassName="active">
+                <Utensils />
+                Recipe
+              </StyledNavLink>
+            </li>
+            <li>
+              <StyledNavLink to="/about" activeClassName="active">
+                <Info />
+                About
+              </StyledNavLink>
+            </li>
+            <li>
+              <StyledNavLink
+                onClick={isLoggedIn ? clickHandle : handleLogin} // Use clickHandle for Logout
+                to={isLoggedIn ? "/" : "/login"} // Navigate based on login state
+              >
+                <User />
+                {isLoggedIn ? "Logout" : "Login"}
+              </StyledNavLink>
+            </li>
+            <li>
+              <StyledNavLink to="/brainstorm" activeClassName="active">
+                <Eye/>
+                Vision
+              </StyledNavLink>
+            </li>
+          </StyledMenu>
+        </nav>
+      </HeaderContainer>
+
+      {showModal && (
+        <modalstyle.ModalOverlay>
+          <modalstyle.ModalContent>
+            <h3>Are you sure you want to log out?</h3>
+            <modalstyle.ModalButton onClick={handleLogoutAndCloseModal}>
+              Yes
+            </modalstyle.ModalButton>
+            <modalstyle.LogoutButton onClick={closeModal}>
+              No
+            </modalstyle.LogoutButton>
+          </modalstyle.ModalContent>
+        </modalstyle.ModalOverlay>
+      )}
+    </>
   );
-}
+};
 
 // Define prop types
 TopMenu.propTypes = {

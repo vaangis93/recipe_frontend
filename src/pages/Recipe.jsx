@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import blabla from "../apiFacade";
 import { Link } from "react-router";
-import croissant from "../components/Croissant";
-
-
 
 function Recipe() {
   const [dataFromApiObject, setdataFromApiObject] = useState({}); // if endpoint returns an object
@@ -11,9 +8,8 @@ function Recipe() {
   const [checkDataType, setcheckDataType] = useState("");
   const [selectedDifficulty, setselectedDifficulty] = useState("");
 
-   // List of difficulty levels
-   const enumDifficulties = ["VERY_EASY", "EASY", "MEDIUM", "HARD", "VERY_HARD"];
-
+  // List of difficulty levels
+  const enumDifficulties = ["VERY_EASY", "EASY", "MEDIUM", "HARD", "VERY_HARD"];
 
   // to check if its one recipe(object) or all/more recipes(array)
   function checkType(data) {
@@ -37,7 +33,7 @@ function Recipe() {
     blabla.fetchData("/recipes/1", (data) => checkType(data), "GET", true); // find recipe by id = object
   };
 
-//   --------------------- the useEffect is used to fetch data from the api when the page loads for the first time -----------//
+  //   --------------------- the useEffect is used to fetch data from the api when the page loads for the first time -----------//
   useEffect(() => {
     // (urlPath, callback(the data coming back),  method(what http method = eg. GET,POST), addToken, body)
     blabla.fetchData("/recipes", (data) => checkType(data), "GET", true); // /recipes is the endpoint for READALL recipes = array
@@ -48,10 +44,7 @@ function Recipe() {
     setselectedDifficulty(event.target.value); // Update selected category
   };
 
-//   const getUniqueDifficulties = () => {
-//     return [...new Set(dataFromApiArray.map((recipe) => recipe.difficulty))];
-//   };
-
+  // for when i have the time for the logic to click a recipe window and get info as a modal.
   function handleClickToPullInfo(recipe) {
     setdataFromApiArray(recipe); // Update the state with the selected recipe
   }
@@ -79,21 +72,20 @@ function Recipe() {
       ),
     ];
     console.log(filterForDiffDublicatess);
-
     return (
       <>
         <h3>
-          ------------------------Dropdown filter bydifficulty----------------------------------{" "}
+          ------------------------Dropdown filter
+          bydifficulty----------------------------------{" "}
         </h3>
         <div>
-        <label htmlFor="difficulty-select">Filter by difficulty:</label>
-        <select
-          id="difficulty"
-          value={selectedDifficulty} // !!!!!!!!!!!! Removed .difficulty
-          onChange={handleDifficultyChange}
-          required
+          <label htmlFor="difficulty-select">Filter by difficulty:</label>
+          <select
+            id="difficulty"
+            value={selectedDifficulty}
+            onChange={handleDifficultyChange}
+            required
           >
-            
             <option value="">All difficulties</option>
             {enumDifficulties.map((level) => (
               <option key={level} value={level}>
@@ -101,17 +93,29 @@ function Recipe() {
               </option>
             ))}
           </select>
-    
         </div>
       </>
     );
   }
 
+  function handleDelete(id) {
+    blabla.fetchData(
+      `/recipes/${id}`,
+      (data) => checkType(data),
+      "DELETE",
+      true
+    ); // delete by id = object
+
+    setdataFromApiObject(dataFromApiObject); // Update the state with the selected recipe
+    console.log("deleted recipe:", dataFromApiObject);
+  }
+
+  
+
   return (
     <>
       <h1>Recipe</h1>
-    
-      
+
       <br />
       <h3>
         ------------------------------Create recipe
@@ -136,7 +140,7 @@ function Recipe() {
 
       <button onClick={handleClickToFetchASingleRecipe}>
         {" "}
-        Get a single recipe here!{" "}
+        Get a single recipe here by id{" "}
       </button>
 
       {filterToDifficulty()}
@@ -145,8 +149,7 @@ function Recipe() {
       <h3>Recipe Information</h3>
       <table>
         <thead>
-         {/* for when i need to click on the single recipe window and get info-->  <tr onClick={handleClickToPullInfo}></tr> */}
-          <tr onClick={handleClickToPullInfo}>
+          <tr>
             <th>Title</th>
             <th>Ingredients</th>
             <th>Description</th>
@@ -156,11 +159,14 @@ function Recipe() {
         <tbody>
           {filterSelectedDifficulty.map((recipe, index) => (
             // for when i need to click on the single recipe window and get info--> <tr onClick={() => handleClickToPullInfo(recipe)} key={index}>
-            <tr key={index}> 
-            <td>{recipe.title}</td>
+            // <tr key={index} onClick={handleClickToPullInfo}>
+            <tr key={index}>
+              <td>{recipe.title}</td>
               <td>{recipe.ingredientsAndGrams}</td>
               <td>{recipe.description}</td>
               <td>{recipe.difficulty}</td>
+              <button onClick={() => handleDelete(recipe.id)}>Delete</button>
+              <button>Edit</button>
             </tr>
           ))}
         </tbody>

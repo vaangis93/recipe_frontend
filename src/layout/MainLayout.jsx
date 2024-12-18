@@ -13,6 +13,8 @@ const Container = styled.div`
   border: 1px solid blue;
 `;
 
+// ------------- have all the login / logout logic in the MainLayout component because it is the parent component of all the other components. This way, we can pass the login state and login/logout functions as props to all the child components that need them. ------------- 
+
 function MainLayout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
   const [showModal, setShowModal] = useState(false); // Track modal visibility

@@ -7,6 +7,9 @@ if (!res.ok) {
 return res.json();
 }
 
+
+
+
 function apiFacade() {
 /* Insert utility-methods from later steps 
 here (REMEMBER to uncomment in the returned 

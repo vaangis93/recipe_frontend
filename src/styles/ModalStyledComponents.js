@@ -33,6 +33,7 @@ export const ModalButton = styled.button`
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
+  gap: 5px;
 
   &:hover {
     background: ${(props) => (props.primary ? "#d9363e" : "#45a049")};
@@ -53,3 +54,5 @@ export const LogoutButton = styled.button`
     background: #0056b3;
   }
 `;
+
+
