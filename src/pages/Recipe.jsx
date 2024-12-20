@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
 import blabla from "../apiFacade";
 import { Link } from "react-router";
+import "../styles/RecipeStyles.css";
+// import * as StyledComponents from "../styles/RecipeStyle";
+import {
+  RecipeContainer,
+  RecipeCard,
+  RecipeTitle,
+  RecipeDescription,
+  DifficultyBadge,
+  ActionButton,
+} from "../styles/RecipeStyle";
 
 function Recipe() {
   const [dataFromApiObject, setdataFromApiObject] = useState({}); // if endpoint returns an object
   const [dataFromApiArray, setdataFromApiArray] = useState([]); // if endpoint returns an array
   const [checkDataType, setcheckDataType] = useState("");
   const [selectedDifficulty, setselectedDifficulty] = useState("");
+  const [errorDeleteMessage, seterrorDeleteMessage] = useState("");
 
   // List of difficulty levels
   const enumDifficulties = ["VERY_EASY", "EASY", "MEDIUM", "HARD", "VERY_HARD"];
@@ -98,31 +109,34 @@ function Recipe() {
     );
   }
 
-  function handleDelete(id) {
+  const handleDelete = (id) => {
     blabla.fetchData(
       `/recipes/${id}`,
-      (data) => checkType(data),
+      (data) => {
+        if (data?.error) {
+          // data?.error means if its not null or undefined it will be error
+          seterrorDeleteMessage(data.error); // Set error message if there is one
+        } else {
+          setdataFromApiArray(
+            dataFromApiArray.filter((recipe) => recipe.id !== id)
+          ); // Update state on success
+          // setdataFromApiObject(data); // Update state on success
+        }
+      },
       "DELETE",
       true
-    ); // delete by id = object
-
-    setdataFromApiObject(dataFromApiObject); // Update the state with the selected recipe
-    console.log("deleted recipe:", dataFromApiObject);
-  }
-
-  
+    );
+  };
 
   return (
     <>
       <h1>Recipe</h1>
-
       <br />
       <h3>
         ------------------------------Create recipe
         form/input-----------------------------------
       </h3>
       <Link to="/recipeform">Create a New Recipe</Link>
-
       {/* <RecipeForm /> */}
       <br />
       <h3>
@@ -132,45 +146,42 @@ function Recipe() {
       {checkDataType === "array" &&
         dataFromApiArray.map((data) => <h3 key={data.id}>{data.title}</h3>)}
       {checkDataType === "object" && <h3>{dataFromApiObject.title}</h3>}
-
       <button onClick={handleClickToFetchAllRecipe}>
         {" "}
         Get all the recipes here!{" "}
       </button>
-
       <button onClick={handleClickToFetchASingleRecipe}>
         {" "}
         Get a single recipe here by id{" "}
       </button>
-
       {filterToDifficulty()}
-
       <br />
       <h3>Recipe Information</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Ingredients</th>
-            <th>Description</th>
-            <th>Difficulty</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filterSelectedDifficulty.map((recipe, index) => (
-            // for when i need to click on the single recipe window and get info--> <tr onClick={() => handleClickToPullInfo(recipe)} key={index}>
-            // <tr key={index} onClick={handleClickToPullInfo}>
-            <tr key={index}>
-              <td>{recipe.title}</td>
-              <td>{recipe.ingredientsAndGrams}</td>
-              <td>{recipe.description}</td>
-              <td>{recipe.difficulty}</td>
-              <button onClick={() => handleDelete(recipe.id)}>Delete</button>
-              <button>Edit</button>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {errorDeleteMessage &&
+        (() => {
+          alert(errorDeleteMessage); // to make a pop up alert
+          seterrorDeleteMessage(""); // to clear the error message;
+        })()}
+      {/* Display the recipes in styled components */}
+      <RecipeContainer>
+        {filterSelectedDifficulty.map((recipe, index) => (
+          <RecipeCard key={index}>
+            <RecipeTitle>{recipe.title}</RecipeTitle>
+            <RecipeDescription>{recipe.description}</RecipeDescription>
+            {/*  */}
+            <DifficultyBadge diff={recipe.difficulty}> 
+              {recipe.difficulty}
+            </DifficultyBadge>
+            <div>Ingredients: {recipe.ingredientsAndGrams}</div>
+            <div>
+              <ActionButton onClick={() => handleDelete(recipe.id)}>
+                Delete
+              </ActionButton>
+              <ActionButton primary>Edit</ActionButton>
+            </div>
+          </RecipeCard>
+        ))}
+      </RecipeContainer>
     </>
   );
 }

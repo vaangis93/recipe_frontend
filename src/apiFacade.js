@@ -1,3 +1,5 @@
+
+
 const URL = "http://localhost:7070/api/v1";
 
 function handleHttpErrors(res) {
@@ -23,12 +25,26 @@ const login = (username, password) => {
    
  }
  // all the "=" are default values. so if we dont write anything
-const fetchData = (urlPath='', callback=undefined,  method='GET', addToken=false, body='') => {
-    const options = makeOptions(method, addToken, body);
-    console.log("Request options:", options);
-    return fetch (URL + urlPath, options).then(handleHttpErrors).then (data => {callback(data)});
+const fetchData = (urlPath = '', callback = undefined, method = 'GET', addToken = false, body = '') => {
+  const options = makeOptions(method, addToken, body);
+  console.log("Request options:", options);
 
-  }
+  return fetch(URL + urlPath, options)
+    .then(handleHttpErrors)
+    .then(data => {
+      callback(data); // On success, call the callback with the data
+    })
+    .catch(error => {
+      if (error.status === 401) {
+        callback({ error: "YO You need to be an admin or talk to an adult." });
+      } else {
+        callback( console.log ("error: Something went wrong!") );
+      }
+    });
+};
+
+
+
 const makeOptions= (method,addToken,body) =>{
   var opts = {
     method: method,
