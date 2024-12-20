@@ -14,7 +14,7 @@ export const RecipeContainer = styled.div`
 
 // Individual recipe card
 export const RecipeCard = styled.div`
-  background-color: #f9f9f9;
+  background-color: white;
   border: 1px solid #ddd;
   border-radius: 8px;
   border-color: black;
@@ -55,24 +55,23 @@ export const RecipeDescription = styled.p`
 `;
 
 // Difficulty badge
-// Difficulty badge
 export const DifficultyBadge = styled.span.attrs((props) => ({ // THE .attrs() METHOD IS USED TO ADD PROPS TO THE STYLED COMPONENT
     diff: props.diff,
   }))`
     display: inline-block;
     padding: 50px 10px;
     font-size: 0.85em;
-    color: blue;
+    color: black;
     background-color: ${(props) => {
       switch (props.diff) {
         case "VERY_EASY":
-          return "#28a745"; // Green
+          return "#transparent"; 
         case "EASY":
-          return "#8bc34a"; // Light Green
+          return "#87ceeb"; 
         case "MEDIUM":
-          return "#ffc107"; // Yellow
+          return "#1e90ff"; 
         case "HARD":
-          return "#ff5722"; // Orange
+          return "#0000cd";
         case "VERY_HARD":
           return "transparent"; // Transparent for image
         default:
@@ -104,7 +103,7 @@ export const DifficultyBadge = styled.span.attrs((props) => ({ // THE .attrs() M
 
 // Action buttons
 export const ActionButton = styled.button`
-  background-color: ${(props) => (props.primary ? "#007bff" : "#dc3545")};
+  background-color: ${(props) => (props.primary ? "blue" : "#dc3545")};
   color: white;
   border: none;
   border-radius: 5px;
