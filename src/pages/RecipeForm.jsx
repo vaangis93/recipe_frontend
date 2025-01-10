@@ -33,8 +33,8 @@ function RecipeForm() {
     apiFacade.fetchData(
         "/recipes",
         (data) => {
-          // Handle successful response
-          if (data?.error) {
+          // Handle data returned by the API
+          if (data?.error) { // the data?.error checks if the data is NOT null or undefined. so if it IS null or undefined it will not run the code inside the if statement. so we can see if it gets not data instead of an error.
               setErrorMessage("YO! You need to be Admin to create an recipe or ask an adult");
               console.log("No data received from the API.");
            

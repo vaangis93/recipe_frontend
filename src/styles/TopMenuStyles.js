@@ -5,14 +5,29 @@ import styled from "styled-components";
 import { User } from "lucide-react";
 import { NavLink } from "react-router";
 
-// Styled container for the header
+// Styled container for the header - flexbox
+
+// export const HeaderContainer = styled.header`
+//   background-color: #1e3a8a; /* Blue color for header */
+//   padding: 1rem 2rem; /* Padding for the header */
+//   display: flex;
+//   justify-content: center; /* Center the items horizontally */
+//   align-items: center; /* Vertically align items in the middle */
+//   color: white;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+
+//   @media (max-width: 768px) {
+//     padding: 1rem 1.5rem;
+//   }
+// `;
+
+// Styled container for the header - grit
 
 export const HeaderContainer = styled.header`
   background-color: #1e3a8a; /* Blue color for header */
-  padding: 1rem 2rem; /* Padding for the header */
-  display: flex;
-  justify-content: center; /* Center the items horizontally */
-  align-items: center; /* Vertically align items in the middle */
+  padding: 1rem 1rem; // Padding for the header
+  display: grid;
+  place-items: center; /* Centers the content both horizontally and vertically */
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
 
@@ -20,6 +35,7 @@ export const HeaderContainer = styled.header`
     padding: 1rem 1.5rem;
   }
 `;
+
 
 // Hamburger icon for mobile
 export const MenuIcon = styled.div`
@@ -36,9 +52,11 @@ export const MenuIcon = styled.div`
 // Styled navigation list
 export const StyledMenu = styled.ul`
   display: flex;
-  list-style: none;
-  gap: 20px;
+  list-style: none; // removed the bullet points
+  gap: 0px;
   margin: 0;
+  justify-content: center;
+  padding-inline-start: 0px;
 
   @media (max-width: 768px) {
     display: ${props => (props.menuOpen ? "flex" : "none")}; /* Show menu if open */

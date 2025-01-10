@@ -42,6 +42,7 @@ const TopMenu = ({ isLoggedIn, handleLogin, handleLogout }) => {
             <li>
               <StyledNavLink to="/" activeClassName="active">
                 <Home />
+                Home
               </StyledNavLink>
             </li>
             <li>
@@ -67,7 +68,7 @@ const TopMenu = ({ isLoggedIn, handleLogin, handleLogout }) => {
             </li>
             <li>
               <StyledNavLink to="/brainstorm" activeClassName="active">
-                <Eye/>
+                <Eye />
                 Vision
               </StyledNavLink>
             </li>

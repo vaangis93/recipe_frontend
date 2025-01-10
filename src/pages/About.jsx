@@ -1,7 +1,21 @@
+import { AboutContainer, ImageStyle } from "../styles/AboutStyle";
+
 function About() {
     return ( 
     <>
-    <h1>About</h1>
+    <AboutContainer>
+    
+    
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    </AboutContainer>
 </>
     )
 }

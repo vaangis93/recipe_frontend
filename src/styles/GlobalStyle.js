@@ -77,6 +77,8 @@ p{
     font-size: 1rem;
 }
 
+
+
 `;
 
 export default GlobalStyle;

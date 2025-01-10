@@ -162,17 +162,20 @@ function Recipe() {
           alert(errorDeleteMessage); // to make a pop up alert
           seterrorDeleteMessage(""); // to clear the error message;
         })()}
-      {/* Display the recipes in styled components */}
+
       <RecipeContainer>
         {filterSelectedDifficulty.map((recipe, index) => (
           <RecipeCard key={index}>
-            <RecipeTitle>{recipe.title}</RecipeTitle>
-            <RecipeDescription>{recipe.description}</RecipeDescription>
-            {/*  */}
-            <DifficultyBadge diff={recipe.difficulty}> 
-              {recipe.difficulty}
-            </DifficultyBadge>
+            <RecipeTitle>
+              <h4>Title : {recipe.title}</h4>
+            </RecipeTitle>
+
+            <h5>Difficulty : {recipe.difficulty} </h5>
+            <DifficultyBadge diff={recipe.difficulty}></DifficultyBadge>
             <div>Ingredients: {recipe.ingredientsAndGrams}</div>
+            <RecipeDescription>
+              <h5> Description : {recipe.description}</h5>
+            </RecipeDescription>
             <div>
               <ActionButton onClick={() => handleDelete(recipe.id)}>
                 Delete

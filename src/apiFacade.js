@@ -1,6 +1,7 @@
 
 
-const URL = "http://localhost:7070/api/v1";
+// const URL = "http://localhost:7070/api/v1"; // local 
+const URL = "https://recipe.vaangis.dk/api/v1"; // deployed / production
 
 function handleHttpErrors(res) {
 if (!res.ok) {
@@ -13,9 +14,7 @@ return res.json();
 
 
 function apiFacade() {
-/* Insert utility-methods from later steps 
-here (REMEMBER to uncomment in the returned 
-object when you do)*/
+
    
 const login = (username, password) => { 
     const options = makeOptions("POST", false, {username: username, password: password });
