@@ -169,17 +169,18 @@ function Recipe() {
 
       <RecipeContainer>
         {filterSelectedDifficulty.map((recipe, index) => (
-          <RecipeCard key={index} onClick={openModal}>
-               <Modal 
-                isOpen={isModalOpen}
-                onClose={handleAction}
-                onConfirm={closeModal}
-                title="Do you want to proceed?"
-                confirmText="Proceed"
-                cancelText="Cancel"
-                >
+          <RecipeCard key={index} >
+          {/* // onClick={openModal}>
+          //      <Modal 
+          //       isOpen={isModalOpen}
+          //       onClose={handleAction}
+          //       onConfirm={closeModal}
+          //       title="Do you want to proceed?"
+          //       confirmText="Proceed"
+          //       cancelText="Cancel"
+          //       > */}
        
-        </Modal>
+       
             <RecipeTitle>
               <h4>Title : {recipe.title}</h4>
             </RecipeTitle>
