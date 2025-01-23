@@ -18,15 +18,15 @@ function About() {
     <AboutContainer>
     <button onClick={() => setForceError(true)}>Trigger Error</button>
         
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
-    <ImageStyle src="public\pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
+    <ImageStyle src="pics\coolCat.jpg" alt="cat" />
     </AboutContainer>
    
 </>

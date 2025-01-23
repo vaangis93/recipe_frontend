@@ -13,7 +13,7 @@ class ErrorBoundary extends Component {
     render() {
         if (this.state.hasError) // if hasError is true the component renders a fallback UI 
             { 
-            return <><img src="public\pics\sorry.png" alt="sorry" style={{ width: "100%" , height: "100%" }} />
+            return <><img src="pics\sorry.png" alt="sorry" style={{ width: "100%" , height: "100%" }} />
             </>;
         }
         return this.props.children; // returns the children components if no error occurs 
