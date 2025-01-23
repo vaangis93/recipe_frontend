@@ -28,7 +28,7 @@ function RecipeForm() {
 
   // Handle form submission
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); // this prevents the page from reloading when the form is submitted
 
     apiFacade.fetchData(
         "/recipes",

@@ -11,9 +11,9 @@ function Login() {
   });
 
   const performLogin = (evt) => {
-    evt.preventDefault();
+    evt.preventDefault(); // Prevent the default means that the form is not submitted in the default way
     facade
-      .login(loginCredentials.username, loginCredentials.password)
+      .login(loginCredentials.username, loginCredentials.password) // Call the login function with useState values
       .then(() => {
         setLoggedIn(true); // Set loggedIn state to true after a successful login
       })

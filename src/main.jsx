@@ -14,12 +14,13 @@ import MainLayout from "./layout/MainLayout.jsx";
 import Brainstorm from "./pages/Brainstorm.jsx";
 import RecipeForm from "./pages/RecipeForm.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />} errorElement= {<ErrorPage/>}>
       <Route index element={<Home />} />
-      <Route path="about" element={<About />} />
+      <Route path="about" element={<ErrorBoundary> <About /> </ErrorBoundary>} />
       <Route path="home" element={<Home />} />
       <Route path="login" element={<Login />} />
       <Route path="recipe" element={<Recipe />} />

@@ -4,10 +4,11 @@
 const URL = "https://recipe.vaangis.dk/api/v1"; // deployed / production
 
 function handleHttpErrors(res) {
-if (!res.ok) {
-  return Promise.reject({ status: res.status, fullError: res.json() })
+if (!res.ok) { // If response status is not OK (200), throw an error
+  return Promise.reject({ status: res.status, fullError: res.json() }) // Rejects the Promise with status:(gives us the status codes)
+  //  and fullerror:(gives us a the object that gives us the body in json) details
 }
-return res.json();
+return res.json();// Resolves with JSON data when the Promise is resolved
 }
 
 
@@ -29,14 +30,14 @@ const fetchData = (urlPath = '', callback = undefined, method = 'GET', addToken 
   console.log("Request options:", options);
 
   return fetch(URL + urlPath, options)
-    .then(handleHttpErrors)
+    .then(handleHttpErrors) // calls our custom error handling function
     .then(data => {
       callback(data); // On success, call the callback with the data
     })
     .catch(error => {
-      if (error.status === 401) {
+      if (error.status === 401) { // 401 Unauthorized
         callback({ error: "YO You need to be an admin or talk to an adult." });
-      } else {
+      } else { // If another error occurs, log the error to the console
         callback( console.log ("error: Something went wrong!") );
       }
     });
@@ -64,16 +65,20 @@ const makeOptions= (method,addToken,body) =>{
 
 const setToken = (token) => {
     localStorage.setItem('jwtToken', token)
+    sessionStorage.setItem('jwtToken', token)// to show example of session storage
   }
 const getToken = () => {
-  return localStorage.getItem('jwtToken')
+  return localStorage.getItem('jwtToken') || sessionStorage.getItem('jwtToken'); // get from local storage OR session storage(as example)
 }
+
+// check if token is present in local storage or session storage
 const loggedIn = () => {
   const loggedIn = getToken() != null;
   return loggedIn;
 }
 const logout = () => {
   localStorage.removeItem("jwtToken");
+  sessionStorage.removeItem("jwtToken");
 }
 
 return {

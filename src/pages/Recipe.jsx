@@ -10,7 +10,12 @@ import {
   RecipeDescription,
   DifficultyBadge,
   ActionButton,
+  RecipeHeadline,
+  DropDownContainer,
+  DropDownSelect,
+  OptionSelectStyle,
 } from "../styles/RecipeStyle";
+import Modal from "../components/Modal";
 
 function Recipe() {
   const [dataFromApiObject, setdataFromApiObject] = useState({}); // if endpoint returns an object
@@ -18,6 +23,16 @@ function Recipe() {
   const [checkDataType, setcheckDataType] = useState("");
   const [selectedDifficulty, setselectedDifficulty] = useState("");
   const [errorDeleteMessage, seterrorDeleteMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // ----- Modals ----- //
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleAction = () => { closeModal()};
+  
+
+
 
   // List of difficulty levels
   const enumDifficulties = ["VERY_EASY", "EASY", "MEDIUM", "HARD", "VERY_HARD"];
@@ -45,9 +60,11 @@ function Recipe() {
   };
 
   //   --------------------- the useEffect is used to fetch data from the api when the page loads for the first time -----------//
+
   useEffect(() => {
     // (urlPath, callback(the data coming back),  method(what http method = eg. GET,POST), addToken, body)
     blabla.fetchData("/recipes", (data) => checkType(data), "GET", true); // /recipes is the endpoint for READALL recipes = array
+    console.log("useEffect is running");
   }, []);
 
   // Handle category selection
@@ -85,26 +102,26 @@ function Recipe() {
     console.log(filterForDiffDublicatess);
     return (
       <>
-        <h3>
-          ------------------------Dropdown filter
-          bydifficulty----------------------------------{" "}
-        </h3>
-        <div>
+        <DropDownContainer>
           <label htmlFor="difficulty-select">Filter by difficulty:</label>
-          <select
+
+          {/* {enumDifficulties.map((level) => ( the start of map */}
+
+          <DropDownSelect
             id="difficulty"
             value={selectedDifficulty}
             onChange={handleDifficultyChange}
             required
+            diff={selectedDifficulty}
           >
-            <option value="">All difficulties</option>
+            <option value="">Select difficulty</option>
             {enumDifficulties.map((level) => (
               <option key={level} value={level}>
                 {level}
               </option>
             ))}
-          </select>
-        </div>
+          </DropDownSelect>
+        </DropDownContainer>
       </>
     );
   }
@@ -130,33 +147,20 @@ function Recipe() {
 
   return (
     <>
-      <h1>Recipe</h1>
-      <br />
-      <h3>
-        ------------------------------Create recipe
-        form/input-----------------------------------
-      </h3>
-      <Link to="/recipeform">Create a New Recipe</Link>
-      {/* <RecipeForm /> */}
-      <br />
-      <h3>
-        -----------------------------Buttons to get all or single
-        recipe-------------------------
-      </h3>
-      {checkDataType === "array" &&
-        dataFromApiArray.map((data) => <h3 key={data.id}>{data.title}</h3>)}
-      {checkDataType === "object" && <h3>{dataFromApiObject.title}</h3>}
-      <button onClick={handleClickToFetchAllRecipe}>
-        {" "}
-        Get all the recipes here!{" "}
-      </button>
-      <button onClick={handleClickToFetchASingleRecipe}>
-        {" "}
-        Get a single recipe here by id{" "}
-      </button>
+      <RecipeHeadline>Recipes</RecipeHeadline>
+
+      <Link
+        to="/recipeform"
+        style={{
+          color: "#1e3a8a", // Use quotes for color value
+          display: "flex", // Use camelCase for property names
+          justifyContent: "center", // CamelCase for CSS properties
+        }}
+      >
+        Create a New Recipe
+      </Link>
+
       {filterToDifficulty()}
-      <br />
-      <h3>Recipe Information</h3>
       {errorDeleteMessage &&
         (() => {
           alert(errorDeleteMessage); // to make a pop up alert
@@ -165,7 +169,17 @@ function Recipe() {
 
       <RecipeContainer>
         {filterSelectedDifficulty.map((recipe, index) => (
-          <RecipeCard key={index}>
+          <RecipeCard key={index} onClick={openModal}>
+               <Modal 
+                isOpen={isModalOpen}
+                onClose={handleAction}
+                onConfirm={closeModal}
+                title="Do you want to proceed?"
+                confirmText="Proceed"
+                cancelText="Cancel"
+                >
+       
+        </Modal>
             <RecipeTitle>
               <h4>Title : {recipe.title}</h4>
             </RecipeTitle>

@@ -15,30 +15,29 @@ export const RecipeContainer = styled.div`
 
 // Individual recipe card
 export const RecipeCard = styled.div`
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  border-color: black;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  max-width: 300px;
-  min-width: 250px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: transform 0.2s ease-in-out;
+  background-color: white; // Sets background color to white
+  border: 1px solid #ddd; // Adds a light border around the card
+  border-radius: 8px; // Rounds the corners of the card
+  border-color: black; // Sets border color to black
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Adds a subtle shadow
+  padding: 15px; // Adds padding inside the card
+  max-width: 300px; // Sets maximum width of the card
+  min-width: 250px; // Sets minimum width of the card
+  text-align: left; // Aligns text to the left
+  display: flex; // Uses flexbox layout
+  flex-direction: column; // Stacks content vertically
+  gap: 10px; // Adds space between items
+  transition: transform 0.2s ease-in-out; // Smooth transition for transform effect
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); // Moves the card up on hover
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); // Darkens shadow on hover
   }
 
   @media (max-width: 768px) {
-    max-width: 100%;
+    max-width: 100%; // Makes card full-width on smaller screens
   }
 `;
-
 // Title of the recipe
 export const RecipeTitle = styled.h4`
   font-size: 1.2em;
@@ -86,11 +85,11 @@ export const DifficultyBadge = styled.span.attrs((props) => ({
       case "VERY_EASY":
         return "url('/pics/coolCat.jpg')"; // Image for VERY_EASY
       case "EASY":
-        return "url('/pics/1.png')"; // 
+        return "url('/pics/1.png')"; //
       case "MEDIUM":
-        return "url('/pics/2.png')"; // 
+        return "url('/pics/2.png')"; //
       case "HARD":
-        return "url('/pics/3.png')"; // 
+        return "url('/pics/3.png')"; //
       case "VERY_HARD":
         return "url('/pics/gondon.png')"; // Image for VERY_HARD
 
@@ -125,6 +124,7 @@ export const ActionButton = styled.button`
   }
 `;
 
+// Link styled component. not used atm. didnt get it to quite work. so inline styling is used instead
 export const LinkStyle = styled(Link)`
   // this is how you style a Link component or other components
   background-color: rgb(74, 170, 67);
@@ -143,4 +143,63 @@ export const LinkStyle = styled(Link)`
   @media (max-width: 768px) {
     font-size: 0.8em;
   }
+`;
+
+export const RecipeHeadline = styled.h1`
+  color: #1e3a8a;
+  display: flex;
+  justify-content: center;
+  font-size: "24px"; // Larger font size: ;
+  font-weight: "bold"; // Bold text
+  text-shadow: "1px 1px 2px gray"; // Subtle shadow
+  margin: "20px 0 20px 0"; // Margin top and bottom
+  padding: 20px 0; // Padding top and bottom
+`;
+
+export const DropDownContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 0;
+  color: #1e3a8a;
+  font-size: 20px;
+`;
+
+
+
+export const DropDownSelect = styled.select.attrs((props) => ({ diff: props.diff}))`
+  font-size: 0.90em;
+  color: ${(props) =>{
+    switch (props.diff) {
+      case "VERY_EASY":
+        return "green";
+      case "EASY":
+        return "#87ceeb";
+      case "MEDIUM":
+        return "#1e90ff";
+      case "HARD":
+        return "#0000cd";
+      case "VERY_HARD":
+        return "red"; // Transparent for image
+      default:
+        return "#1e3a8a"; // Blue
+  }}};
+`;
+export const OptionSelectStyle = styled.option.attrs((props) => ({ diff: props.diff}))`
+  font-size: 0.90em;
+  color: ${(props) =>{
+    switch (props.diff) {
+      case "VERY_EASY":
+        return "green";
+      case "EASY":
+        return "#87ceeb";
+      case "MEDIUM":
+        return "#1e90ff";
+      case "HARD":
+        return "#0000cd";
+      case "VERY_HARD":
+        return "red"; // Transparent for image
+      default:
+        return "#1e3a8a"; // Blue
+  }}};
 `;
